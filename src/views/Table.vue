@@ -25,24 +25,33 @@ export default {
       cards: [],
     };
   },
-  firestore() {
-    return {
-      cards: db.collection('cards').where("belong_to", "==", this.id)
-    }
-  },
+  // firestore() {
+  //   return {
+  //     cards: db.collection('cards').where("belong_to", "==", this.id)
+  //   }
+  // },
   // computed: {
   //   cardsInHand() {
-  //     let cardsBelongTo = [];
-  //     cardsBelongTo = this.cards.where("belong_to", "==", this.id)
-  //     return {
-  //       cardsBelongTo
-  //     }
+  //     return this.cards.where("belong_to", "==", this.id)
   //   }
   // },
   methods: {
     consoleLog() {
       console.log(this.id)
-    }
+    },
+    // firestore() {
+    //   return {
+    //     cards: db.collection('cards').where("belong_to", "==", 1)
+    //   }
+    // },
+  },
+  created() {
+    // this.firestore()
+    firestore() {
+      return {
+        cards: db.collection('cards').where("belong_to", "==", this.id)
+      }
+    },
   },
   components: {
     Hand,
