@@ -1,0 +1,60 @@
+<template>
+  <div class="table">
+    <div class="flex">
+    <Deck />
+    </div>
+    <div class="flex">
+    <Hand v-for="(data, index) in cards" :key="index" :card="data" />
+    </div>
+    <div>{{ id }}</div>
+    <button @click="consoleLog()">console.log()</button>
+  </div>
+</template>
+
+<script>
+import Hand from "../components/Hand";
+import Deck from "../components/Deck";
+import {db} from '../plugins/firebase';
+// import axios from "axios";
+
+export default {
+  Name: 'Table',
+  props: ["id"],
+  data() {
+    return {
+      cards: [],
+    };
+  },
+  firestore() {
+    return {
+      cards: db.collection('cards').where("belong_to", "==", this.id)
+    }
+  },
+  // computed: {
+  //   cardsInHand() {
+  //     let cardsBelongTo = [];
+  //     cardsBelongTo = this.cards.where("belong_to", "==", this.id)
+  //     return {
+  //       cardsBelongTo
+  //     }
+  //   }
+  // },
+  methods: {
+    consoleLog() {
+      console.log(this.id)
+    }
+  },
+  components: {
+    Hand,
+    Deck
+  },
+};
+</script>
+
+<style scoped>
+.flex {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+</style>
