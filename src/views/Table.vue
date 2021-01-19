@@ -25,11 +25,11 @@ export default {
       cards: [],
     };
   },
-  // firestore() {
-  //   return {
-  //     cards: db.collection('cards').where("belong_to", "==", this.id)
-  //   }
-  // },
+  firestore() {
+    return {
+      cards: db.collection('cards').where("belong_to", "==", 1)
+    }
+  },
   // computed: {
   //   cardsInHand() {
   //     return this.cards.where("belong_to", "==", this.id)
@@ -45,14 +45,13 @@ export default {
     //   }
     // },
   },
-  created() {
-    // this.firestore()
-    firestore() {
-      return {
-        cards: db.collection('cards').where("belong_to", "==", this.id)
-      }
-    },
-  },
+  // created() {
+  //   firestore() {
+  //     return {
+  //       cards: db.collection('cards').where("belong_to", "==", this.id)
+  //     }
+  //   },
+  // },
   components: {
     Hand,
     Deck
